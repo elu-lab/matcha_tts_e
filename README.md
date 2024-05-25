@@ -2,7 +2,7 @@
 This repo is mainly based on :octocat: [🍵 Matcha-TTS Official Github](https://github.com/shivammehta25/Matcha-TTS/tree/main) and some codes are modified. The purpose of this repository is to study and study 🍵 [Matcha-TTS: A fast TTS architecture with conditional flow matching](https://huggingface.co/papers/2309.03199).
 
 - 🔥[`Pytorch`](https://pytorch.org/), ⚡[`Lightning`](https://lightning.ai/docs/pytorch/stable/), 🐉🐲🐲[`hydra-core`](https://hydra.cc/docs/intro/)
-- 🤗 `wandb` [![wandb](https://raw.githubusercontent.com/wandb/assets/main/wandb-github-badge-gradient.svg)](https://wandb.ai/wako/matcha_tts_e?nw=nwuserwako) :point_left: Click 
+- 🤗 **[`wandb`](https://kr.wandb.ai/)** Click 👉 [![wandb](https://raw.githubusercontent.com/wandb/assets/main/wandb-github-badge-gradient.svg)](https://wandb.ai/wako/matcha_tts_e?nw=nwuserwako)     
   - <details>
     <summary> dashboard screenshots </summary>
     <div>
@@ -12,7 +12,7 @@ This repo is mainly based on :octocat: [🍵 Matcha-TTS Official Github](https:/
 
 ## Trying to code Simpler.
 While studying :octocat: [🍵 Matcha-TTS Official Github](https://github.com/shivammehta25/Matcha-TTS/tree/main), I modified some codes to make it simpler.
-- 🤗 Logger: `wandb` (More comfortable and easy access)
+- 🤗 Logger: **[`wandb`](https://kr.wandb.ai/)** (More comfortable and easy access)
 - :fire: [`[Pytorch-Hub]NVIDIA/HiFi-GAN`](https://pytorch.org/hub/nvidia_deeplearningexamples_hifigan/): used as a vocoder.
 
 ## Limitations:
