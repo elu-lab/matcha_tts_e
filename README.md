@@ -16,7 +16,7 @@ While studying :octocat: [🍵 Matcha-TTS Official Github](https://github.com/sh
 - :fire: [`[Pytorch-Hub]NVIDIA/HiFi-GAN`](https://pytorch.org/hub/nvidia_deeplearningexamples_hifigan/): used as a vocoder.
 
 ## Limitations:
-Encountered some unexpected errors when trying to run for training. I managed to solve the problem, but I failed to run for multi-gpu training. I wanted multi-gpu training, but I don't have enough time for this. When I tried this at first, I got this message with training stoppped:
+Encountered some unexpected errors when trying to run for training. I managed to solve the problem, but I failed to run for multi-gpu training. Instead of multi-gpu training, I could run for a single-gpu training. I also wanted multi-gpu training, but I don't have enough time for this. When I tried this at first, I got this message with training stoppped:
 
 > *"child process with pid <number> terminated with code -11. forcefully terminating all other processes to avoid zombies 🧟"*
 
