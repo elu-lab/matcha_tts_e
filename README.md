@@ -39,7 +39,7 @@ pip install monotonic-align
 ```shell
 pip install git+https://github.com/mushanshanshan/monotonic_align.git
 ```
-We decided to use `monotonic_align` from this, and you can use like this:
+No matter what you choose to use, you can use like this:
 ```python
 import monotonic_align
 ```
