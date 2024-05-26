@@ -1,5 +1,4 @@
 ## Github[text.cleaners.py]: https://github.com/shivammehta25/Matcha-TTS/blob/main/matcha/text/cleaners.py
-
 """ from https://github.com/keithito/tacotron
 
 Cleaners are transformations that run over the input text at both training and eval time.
@@ -17,6 +16,7 @@ import logging
 import re
 
 import phonemizer
+import piper_phonemize
 from unidecode import unidecode
 
 # To avoid excessive logging we set the log level of the phonemizer package to Critical
@@ -93,13 +93,8 @@ def transliteration_cleaners(text):
     """Pipeline for non-English text that transliterates to ASCII."""
     text = convert_to_ascii(text)
     text = lowercase(text)
-
-    """In this Case: global_phonemizer set for other language."""
-    phonemes = global_phonemizer.phonemize([text], strip=True, njobs=1)[0]
-    phonemes = collapse_whitespace(phonemes)
-
-    phonemes = collapse_whitespace( phonemes)
-    return  phonemes
+    text = collapse_whitespace(text)
+    return text
 
 
 def english_cleaners2(text):
@@ -108,5 +103,15 @@ def english_cleaners2(text):
     text = lowercase(text)
     text = expand_abbreviations(text)
     phonemes = global_phonemizer.phonemize([text], strip=True, njobs=1)[0]
+    phonemes = collapse_whitespace(phonemes)
+    return phonemes
+
+
+def english_cleaners_piper(text):
+    """Pipeline for English text, including abbreviation expansion. + punctuation + stress"""
+    text = convert_to_ascii(text)
+    text = lowercase(text)
+    text = expand_abbreviations(text)
+    phonemes = "".join(piper_phonemize.phonemize_espeak(text=text, voice="en-US")[0])
     phonemes = collapse_whitespace(phonemes)
     return phonemes
