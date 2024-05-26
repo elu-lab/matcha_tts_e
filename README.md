@@ -15,13 +15,6 @@ While studying :octocat: [🍵 Matcha-TTS Official Github](https://github.com/sh
 - 🤗 Logger: **[`wandb`](https://kr.wandb.ai/)** (More comfortable and easy access)
 - :fire: [`[Pytorch-Hub]NVIDIA/HiFi-GAN`](https://pytorch.org/hub/nvidia_deeplearningexamples_hifigan/): used as a vocoder.
 
-## Limitations:
-Encountered some unexpected errors when trying to run for training. I managed to solve the problem, but I failed to run for multi-gpu training. Instead of multi-gpu training, I could run for a single-gpu training. I also wanted multi-gpu training, but I don't have enough time for this. When I tried this at first, I got this message with training stoppped:
-
-> *"child process with pid <number> terminated with code -11. forcefully terminating all other processes to avoid zombies 🧟"*
-
-I'll write the CLI-command for multi-gpu training in the `Train` section.
-
 ## Dataset
 - [LJSpeech](https://keithito.com/LJ-Speech-Dataset/)
   - `Language`: English :us:
