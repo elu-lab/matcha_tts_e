@@ -1,4 +1,4 @@
-## Github[text]: https://github.com/shivammehta25/Matcha-TTS/blob/main/matcha/text/__init__.py
+## Github[text]: https://github.com/shivammehta25/Matcha-TTS/blob/main/matcha/text/__init__.py""
 """ from https://github.com/keithito/tacotron """
 from matcha.text import cleaners
 from matcha.text.symbols import symbols
@@ -52,3 +52,4 @@ def _clean_text(text, cleaner_names):
             raise Exception("Unknown cleaner: %s" % name)
         text = cleaner(text)
     return text
+    
