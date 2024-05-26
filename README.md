@@ -29,17 +29,12 @@ I'll write the CLI-command for multi-gpu training in the `Train` section.
   - `sample_rate`: 22.05kHz
 
 ## monotonic_align Installation
-: you can install MAS(Monotonic_Alignment_Search) with one of following commands below:     
-:octocat: [moonsikpark/monotonic_align](https://github.com/moonsikpark/monotonic_align)
+: you can install MAS(Monotonic_Alignment_Search) with a following command below:     
+:octocat: [resemble-ai/monotonic_align](https://github.com/resemble-ai/monotonic_align)
 ```shell
-pip install monotonic-align
+pip install git+https://github.com/resemble-ai/monotonic_align.git
 ```
-
-:octocat: [mushanshanshan/monotonic_align](https://github.com/mushanshanshan/monotonic_align)
-```shell
-pip install git+https://github.com/mushanshanshan/monotonic_align.git
-```
-No matter what you choose to use, you can use like this:
+you can use like this:
 ```python
 import monotonic_align
 ```
