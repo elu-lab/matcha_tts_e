@@ -15,7 +15,7 @@ from importlib.util import find_spec
 from pathlib import Path
 from typing import Any, Callable, Dict, Tuple
 
-
+import wandb
 import gdown
 # What is this? Download files from the Google Drive with link
 # Blog post: https://code-angie.tistory.com/56
@@ -125,7 +125,8 @@ def task_wrapper(task_func: Callable) -> Callable:
                     log.info("Closing wandb")
                     wandb.finish()
 
-        return metric_dict, object_dict
+        # return metric_dict, object_dict
+        return metric_dict
 
     return wrap
 
@@ -182,7 +183,7 @@ def intersperse(lst, item):
 # ========================================================================================================= #
 
 def save_figure_to_numpy(fig):
-    
+
     data = np.fromstring(fig.canvas.tostring_rgb(),
                          dtype=np.uint8, 
                          sep=""
