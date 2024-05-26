@@ -1,5 +1,4 @@
 ## Github[text.symbols.py]: https://github.com/shivammehta25/Matcha-TTS/blob/main/matcha/text/symbols.py
-
 """ from https://github.com/keithito/tacotron
 
 Defines the set of symbols used in text input to the model.
