@@ -146,7 +146,7 @@ class BaseLightningClass(LightningModule, ABC):
             one_batch = next(iter(self.trainer.val_dataloaders))
             if self.current_epoch == 0:
                 log.debug("Plotting Original Samples")
-                for i in range(2):
+                for i in range(1):
                     y  = one_batch["y"][i].unsqueeze(0).to(self.device)
 
                     # this is for other loggers:
@@ -159,32 +159,33 @@ class BaseLightningClass(LightningModule, ABC):
                     # this is for wandb:
                     # https://docs.wandb.ai/guides/integrations/lightning
                     self.logger.experiment.log({f"ORIGIN_SAMPLE": [wandb.Image(plot_tensor(y.squeeze().cpu(), add_wandb_img = True))]})
-                        
-            log.debug("Synthesizing ...")
-            for i in range(2):
-                x = one_batch["x"][i].unsqueeze(0).to(self.device)
-                x_lengths = one_batch["x_lengths"][i].unsqueeze(0).to(self.device)
-                spks = one_batch["spks"][i].unsqueeze(0).to(self.device) if one_batch["spks"] is not None else None
-                output = self.synthesise(x[:, :x_lengths], x_lengths, n_timesteps = 10, spks = spks)
-                y_enc, y_dec = output["encoder_outputs"], output["decoder_outputs"]
-                attn = output["attn"]
 
-                # this is for other loggers:
-                # y_enc
-                # self.logger.experiment.add_image(f"Generated_ENC/{i}", plot_tensor(y_enc.squeeze().cpu()), self.current_epoch, dataformats = "HWC")
-                # y_dec
-                # self.logger.experiment.add_image(f"Generated_DEC/{i}",  plot_tensor(y_dec.squeeze().cpu()), self.current_epoch, dataformats = "HWC")
-                # alignments
-                # self.logger.experiment.add_image(f"Alignment/{i}", plot_tensor(attn.squeeze().cpu()), self.current_epoch, dataformats = "HWC")
+            if self.current_epoch % 100 == 0:     
+                log.debug("Synthesizing ...")
+                for i in range(1):
+                    x = one_batch["x"][i].unsqueeze(0).to(self.device)
+                    x_lengths = one_batch["x_lengths"][i].unsqueeze(0).to(self.device)
+                    spks = one_batch["spks"][i].unsqueeze(0).to(self.device) if one_batch["spks"] is not None else None
+                    output = self.synthesise(x[:, :x_lengths], x_lengths, n_timesteps = 10, spks = spks)
+                    y_enc, y_dec = output["encoder_outputs"], output["decoder_outputs"]
+                    attn = output["attn"]
 
-                # this is for wandb:
-                # https://docs.wandb.ai/guides/integrations/lightning
-                # y_enc
-                self.logger.experiment.log({f"GEN_ENC_SAMPLE": [wandb.Image(plot_tensor(y_enc.squeeze().cpu(), add_wandb_img = True))]}) # caption = f"Generated_ENC/{i} @ Epoch {self.current_epoch}")]})
-                # y_dec
-                self.logger.experiment.log({f"GEN_DEC_SAMPLE": [wandb.Image(plot_tensor(y_dec.squeeze().cpu(), add_wandb_img = True))]}) # caption = f"Generated_DEC/{i} @ Epoch {self.current_epoch}")]})
-                # attn
-                self.logger.experiment.log({f"ALIGN_SAMPLE": [wandb.Image(plot_tensor(attn.squeeze().cpu(), add_wandb_img = True))]}) # caption = f"Alignment/{i} @ Epoch {self.current_epoch}")]})
+                    # this is for other loggers:
+                    # y_enc
+                    # self.logger.experiment.add_image(f"Generated_ENC/{i}", plot_tensor(y_enc.squeeze().cpu()), self.current_epoch, dataformats = "HWC")
+                    # y_dec
+                    # self.logger.experiment.add_image(f"Generated_DEC/{i}",  plot_tensor(y_dec.squeeze().cpu()), self.current_epoch, dataformats = "HWC")
+                    # alignments
+                    # self.logger.experiment.add_image(f"Alignment/{i}", plot_tensor(attn.squeeze().cpu()), self.current_epoch, dataformats = "HWC")
+
+                    # this is for wandb:
+                    # https://docs.wandb.ai/guides/integrations/lightning
+                    # y_enc
+                    self.logger.experiment.log({f"GEN_ENC_SAMPLE": [wandb.Image(plot_tensor(y_enc.squeeze().cpu(), add_wandb_img = True))]}) # caption = f"Generated_ENC/{i} @ Epoch {self.current_epoch}")]})
+                    # y_dec
+                    self.logger.experiment.log({f"GEN_DEC_SAMPLE": [wandb.Image(plot_tensor(y_dec.squeeze().cpu(), add_wandb_img = True))]}) # caption = f"Generated_DEC/{i} @ Epoch {self.current_epoch}")]})
+                    # attn
+                    self.logger.experiment.log({f"ALIGN_SAMPLE": [wandb.Image(plot_tensor(attn.squeeze().cpu(), add_wandb_img = True))]}) # caption = f"Alignment/{i} @ Epoch {self.current_epoch}")]})
 
     ## https://lightning.ai/docs/pytorch/stable/api/lightning.pytorch.core.hooks.ModelHooks.html
     def on_before_optimizer_step(self, optimizer):
