@@ -16,13 +16,15 @@ While studying :octocat: [🍵 Matcha-TTS Official Github](https://github.com/sh
 - :fire: [`[Pytorch-Hub]NVIDIA/HiFi-GAN`](https://pytorch.org/hub/nvidia_deeplearningexamples_hifigan/): used as a vocoder.
 
 ## Dataset
-- [LJSpeech](https://keithito.com/LJ-Speech-Dataset/)
+[**LJSpeech**](https://keithito.com/LJ-Speech-Dataset/)
   - `Language`: English :us:
   - `Speaker`: Single Speaker
   - `sample_rate`: 22.05kHz
 
-## monotonic_align Installation
-: you can install MAS(Monotonic_Alignment_Search) with a following command below:     
+## MAS(Monotonic Alignment Search) Installation
+This is not included in [`requirements.txt`](https://github.com/elu-lab/matcha_tts_e/blob/main/requirements.txt). You can install MAS(Monotonic_Alignment_Search) with a following command below:     
+
+
 :octocat: [resemble-ai/monotonic_align](https://github.com/resemble-ai/monotonic_align)
 ```shell
 pip install git+https://github.com/resemble-ai/monotonic_align.git
@@ -34,11 +36,11 @@ import monotonic_align
 
 ## Compute `mel_mean`, `mel_std` of ljspeech dataset
 Let's assume we are training with LJ Speech
-1. Download the dataset from [here](https://keithito.com/LJ-Speech-Dataset/), extract it to `data/LJSpeech-1.1`, and prepare the file lists to point to the extracted data like for item 5 in the setup of the [NVIDIA Tacotron 2 repo](https://github.com/NVIDIA/tacotron2#setup).
+1. Download the dataset from [here](https://keithito.com/LJ-Speech-Dataset/), extract it to your own data dir (In my case: `data/LJSpeech/ljs/LJSpeech-1.1`, Don't ask why), and prepare the file lists to point to the extracted data like for item 5 in the setup of the [NVIDIA Tacotron 2 repo](https://github.com/NVIDIA/tacotron2#setup).
 2. Go to `configs/data/ljspeech.yaml` and change
 ```yaml
-train_filelist_path: data/filelists/ljs_audio_txt_train_filelist.txt
-valid_filelist_path: data/filelists/ljs_audio_txt_val_filelist.txt
+train_filelist_path: data/filelists/ljs_audio_text_train_filelist.txt
+valid_filelist_path: data/filelists/ljs_audio_text_val_filelist.txt
 ```
 3. Generate normalisation statistics with the yaml file of dataset configuration
 ```shell
@@ -47,21 +49,27 @@ PYTHONPATH=. python matcha/utils/generate_data_statistics.py
 4. Update these values in `configs/data/ljspeech.yaml` under `data_statistics` key.
 ```yaml
 data_statistics:  # Computed for ljspeech dataset 
-  mel_mean: -5.517050 
-  mel_std: 2.064383
+  mel_mean: -5.5170512199401855
+  mel_std: 2.0643811225891113
 ```
 Now you got ready to `train`!
 
 ## Train
-You can run training with one of these commands:
+First, you should log-in wandb with your token key in CLI. 
+```
+wandb login --relogin '<your-wandb-api-token>'
+```
+And you can run training with one of these commands:
 ```shell
 PYTHONPATH=. python matcha/train.py experiment=ljspeech
 ```
 ```shell
+# If you run training on a cetain gpu_id:
 CUDA_VISIBLE_DEVICES=2 PYTHONPATH=. python matcha/train.py experiment=ljspeech
 ```
 Also, you can run for multi-gpu training:
 ```shell
+# If you run multi-gpu training:
 CUDA_VISIBLE_DEVICES=2,3 PYTHONPATH=. python matcha/train.py experiment=ljspeech trainer.devices=[0,1]
 ```
 
@@ -70,7 +78,7 @@ It will be continued.
 
 ## Reference
 - 🍵 Paper: [Matcha-TTS: A fast TTS architecture with conditional flow matching](https://huggingface.co/papers/2309.03199)     
-- :octocat: Github: [Official Code](https://github.com/shivammehta25/Matcha-TTS/tree/main)
+└ :octocat: Github: [🍵 Matcha-TTS Official Github](https://github.com/shivammehta25/Matcha-TTS/tree/main) 
 - MAS(Monotonic Alignment Search)   
 └ :octocat: [resemble-ai/monotonic_align](https://github.com/resemble-ai/monotonic_align)
 - 🔥 [`Pytorch`](https://pytorch.org/)
