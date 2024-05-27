@@ -98,7 +98,8 @@ def task_wrapper(task_func: Callable) -> Callable:
         
         # execute the task
         try:
-            metric_dict, object_dict = task_func(cfg=cfg)
+            # metric_dict, object_dict = task_func(cfg=cfg)
+            metric_dict = task_func(cfg=cfg)
 
         # things to do if exception occurs
         except Exception as ex:
