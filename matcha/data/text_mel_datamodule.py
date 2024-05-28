@@ -11,7 +11,7 @@ from torch.utils.data import Dataset, DataLoader
 # matcha-tts
 from matcha.text import text_to_sequence
 from matcha.utils.audio import mel_spectrogram
-from matcha.utils.model import fix_len_compatibility, normalize
+from matcha.utils.model import fix_len_compatibility, normalize, normalize_orig
 from matcha.utils.utils import intersperse
 
 
@@ -69,7 +69,8 @@ class TextMelDataset(Dataset):
 
         # mel_spectrogram : matcha.utils.audio.py
         mel = mel_spectrogram(audio, self.n_fft, self.n_mels, self.sample_rate, self.hop_length, self.win_length, self.f_min, self.f_max, center =False).squeeze()
-        mel = normalize(mel, self.data_parameters["mel_mean"], self.data_parameters["mel_std"])
+        # mel = normalize(mel, self.data_parameters["mel_mean"], self.data_parameters["mel_std"])
+        mel = normalize_orig(mel, self.data_parameters["mel_mean"], self.data_parameters["mel_std"])
         
         return mel
 
