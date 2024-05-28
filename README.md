@@ -42,7 +42,7 @@ import monotonic_align
     
 ## Compute `mel_mean`, `mel_std` of ljspeech dataset
 Let's assume we are training with LJ Speech
-1. Download the dataset from [here](https://keithito.com/LJ-Speech-Dataset/), extract it to your own data dir (In my case: `data/LJSpeech/ljs/LJSpeech-1.1`, Don't ask why), and prepare the file lists to point to the extracted data like for item 5 in the setup of the [NVIDIA Tacotron 2 repo](https://github.com/NVIDIA/tacotron2#setup).
+1. Download the dataset from [here](https://keithito.com/LJ-Speech-Dataset/), extract it to your own data dir (In my case: `data/LJSpeech/ljs/LJSpeech-1.1`), and prepare the file lists to point to the extracted data like for item 5 in the setup of the [NVIDIA Tacotron 2 repo](https://github.com/NVIDIA/tacotron2#setup).
 2. Go to `configs/data/ljspeech.yaml` and change
 ```yaml
 train_filelist_path: data/filelists/ljs_audio_text_train_filelist.txt
