@@ -84,7 +84,7 @@ These codes are run and the example-speeches are synthesized in my vscode enviro
 **Synthesize_Examples.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1JrwHDXrgcarZ7bxBAEP-cgBp6Yf_Ris4?usp=sharing)           
 <img src="/readme_imgs/스크린샷 2024-05-28 오전 8.52.42.png" width="67%"></img>
 - You can refer to the code for synthesis: [`matcha/utils/synthesize_utils.py`](https://github.com/elu-lab/matcha_tts_e/blob/main/matcha/utils/synthesize_utils.py)
-- notebook is also on this github repo: [notebooks/Synthesize_Examples.ipynb](https://github.com/elu-lab/matcha_tts_e/blob/main/notebooks/Synthesize_Examples.ipynb)
+- This notebook is also on this github repo: [`notebooks/Synthesize_Examples.ipynb`](https://github.com/elu-lab/matcha_tts_e/blob/main/notebooks/Synthesize_Examples.ipynb)
 - `CLI Arguments`: Will be Updated!
 
 ## Reference
