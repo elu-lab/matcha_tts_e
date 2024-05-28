@@ -109,10 +109,13 @@ class TimestepEmbedding(nn.Module):
         self.linear_2 = nn.Linear(time_embed_dim, time_embed_dim_out)
 
         # ============================================================== #
+
         if post_act_fn is None:
             self.post_act = None
         else:
             self.post_act = get_activation(post_act_fn)
+            
+        # ============================================================== #
 
     # def forward(self, sample, condition = None):
     #     if condition is not None:
