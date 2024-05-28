@@ -44,26 +44,81 @@ def duration_loss(logw, logw_, lengths):
     return loss
 
 
+# Remove OUTLIER
+def remove_outlier(values):
+    # values: np.array
+    if np.isnan(values).any():
+        p25 = np.nanpercentile(values, 25)
+        p75 = np.nanpercentile(values, 75)
+    else:   
+        p25 = np.percentile(values, 25)
+        p75 = np.percentile(values, 75)
+        
+    # p25 = np.percentile(values, 25)
+    # p75 = np.percentile(values, 75)
+    lower = p25 - 1.5 * (p75 - p25)
+    upper = p75 + 1.5 * (p75 - p25)
+    # normal_indices = np.logical_and(values > lower, values < upper)
+    # return values[normal_indices]
+    
+    values = np.where(values >= lower, values, p25)
+    values = np.where(values <= upper, values, p75)
+    return values 
+
+
 def normalize(data, mu, std):
+    # this is added to avoid NaN things.
+    data_device = data.device
+    data_dtype = data.dtype
+    # Outlier Removed
+    data_new = torch.tensor(remove_outlier(data.numpy()))
+    
     if not isinstance(mu, (float, int)):
         if isinstance(mu, list):
-            mu = torch.tensor(mu, dtype=data.dtype, device=data.device)
+            # mu = torch.tensor(mu, dtype=data.dtype, device=data.device)
+            mu = torch.tensor(mu, dtype=data_dtype, device=data_device)
         elif isinstance(mu, torch.Tensor):
-            mu = mu.to(data.device)
+            # mu = mu.to(data.device)
+            mu = mu.to(data_device)
         elif isinstance(mu, np.ndarray):
-            mu = torch.from_numpy(mu).to(data.device)
+            # mu = torch.from_numpy(mu).to(data.device)
+            mu = torch.from_numpy(mu).to(data_device)
         mu = mu.unsqueeze(-1)
 
     if not isinstance(std, (float, int)):
         if isinstance(std, list):
-            std = torch.tensor(std, dtype=data.dtype, device=data.device)
+            # std = torch.tensor(std, dtype=data.dtype, device=data.device)
+            std = torch.tensor(std, dtype=data_dtype, device=data_device)
         elif isinstance(std, torch.Tensor):
-            std = std.to(data.device)
+            # std = std.to(data.device)
+            std = std.to(data_device)
         elif isinstance(std, np.ndarray):
-            std = torch.from_numpy(std).to(data.device)
+            # std = torch.from_numpy(std).to(data.device)
+            std = torch.from_numpy(std).to(data_device)
         std = std.unsqueeze(-1)
 
-    return (data - mu) / std
+    return (data_new - mu) / std
+
+# def normalize(data, mu, std):
+#     if not isinstance(mu, (float, int)):
+#         if isinstance(mu, list):
+#             mu = torch.tensor(mu, dtype=data.dtype, device=data.device)
+#         elif isinstance(mu, torch.Tensor):
+#             mu = mu.to(data.device)
+#         elif isinstance(mu, np.ndarray):
+#             mu = torch.from_numpy(mu).to(data.device)
+#         mu = mu.unsqueeze(-1)
+
+#     if not isinstance(std, (float, int)):
+#         if isinstance(std, list):
+#             std = torch.tensor(std, dtype=data.dtype, device=data.device)
+#         elif isinstance(std, torch.Tensor):
+#             std = std.to(data.device)
+#         elif isinstance(std, np.ndarray):
+#             std = torch.from_numpy(std).to(data.device)
+#         std = std.unsqueeze(-1)
+
+#     return (data - mu) / std
 
 
 def denormalize(data, mu, std):
