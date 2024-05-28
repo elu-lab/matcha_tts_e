@@ -2,26 +2,27 @@
 This repo is mainly based on :octocat: [🍵 Matcha-TTS Official Github](https://github.com/shivammehta25/Matcha-TTS/tree/main) and some codes are modified. The purpose of this repository is to study and study 🍵 [Matcha-TTS: A fast TTS architecture with conditional flow matching](https://huggingface.co/papers/2309.03199).
 
 - 🔥[`Pytorch`](https://pytorch.org/), ⚡[`Lightning`](https://lightning.ai/docs/pytorch/stable/), 🐉🐲🐲[`hydra-core`](https://hydra.cc/docs/intro/)
-- 🤗 **[`wandb`](https://kr.wandb.ai/)** Click 👉 [![wandb](https://raw.githubusercontent.com/wandb/assets/main/wandb-github-badge-gradient.svg)](https://wandb.ai/wako/matcha_tts_e?nw=nwuserwako)     
-  - <details>
-    <summary> dashboard screenshots </summary>
+- 🤗 **[`wandb`](https://kr.wandb.ai/)** Click 👉 [![wandb](https://raw.githubusercontent.com/wandb/assets/main/wandb-github-badge-gradient.svg)](https://wandb.ai/wako/matcha_tts_e?nw=nwuserwako)
+    <details>
+    <summary>🦋 trim-butterfly-16 (<a href="https://wandb.ai/wako/matcha_tts_e/runs/77nc0bme?nw=nwuserwako">dashboard</a>) </summary>
     <div>
-    <img src="/readme_imgs/스크린샷 2024-05-25 오후 12.17.49.png" width="83%"></img>
+    - Batch Size: 16<br>
+    - GPU: NVIDIA GeForce RTX 4080 <br>
+    - GPU_COUNT: 1<br>
+      <p>
+        <img src="readme_imgs/스크린샷 2024-05-28 오전 9.30.14.png" alt="1" style="width:45%;"/>
+        <img src="readme_imgs/스크린샷 2024-05-28 오전 9.30.31.png" alt="2" style="width:44%;"/>
+     </p>
     </div>
     </details>
 
-## Trying to code Simpler.
+## Trying to code simpler
 While studying :octocat: [🍵 Matcha-TTS Official Github](https://github.com/shivammehta25/Matcha-TTS/tree/main), I modified some codes to make it simpler.
 - 🤗 Logger: **[`wandb`](https://kr.wandb.ai/)** (More comfortable and easy access)
 - :fire: [`[Pytorch-Hub]NVIDIA/HiFi-GAN`](https://pytorch.org/hub/nvidia_deeplearningexamples_hifigan/): used as a vocoder.
+- MAS: :octocat: [resemble-ai/monotonic_align](https://github.com/resemble-ai/monotonic_align) 👇
 
-## Dataset
-[**LJSpeech**](https://keithito.com/LJ-Speech-Dataset/)
-  - `Language`: English :us:
-  - `Speaker`: Single Speaker
-  - `sample_rate`: 22.05kHz
-
-## MAS(Monotonic Alignment Search) Installation
+## MAS(=Monotonic Alignment Search) Installation
 This is not included in [`requirements.txt`](https://github.com/elu-lab/matcha_tts_e/blob/main/requirements.txt). You can install MAS(Monotonic_Alignment_Search) with a following command below:     
 
 
@@ -34,6 +35,11 @@ you can use like this:
 import monotonic_align
 ```
 
+## Dataset: [**LJSpeech**](https://keithito.com/LJ-Speech-Dataset/)
+  - `Language`: English :us:
+  - `Speaker`: Single Speaker
+  - `sample_rate`: 22.05kHz
+    
 ## Compute `mel_mean`, `mel_std` of ljspeech dataset
 Let's assume we are training with LJ Speech
 1. Download the dataset from [here](https://keithito.com/LJ-Speech-Dataset/), extract it to your own data dir (In my case: `data/LJSpeech/ljs/LJSpeech-1.1`, Don't ask why), and prepare the file lists to point to the extracted data like for item 5 in the setup of the [NVIDIA Tacotron 2 repo](https://github.com/NVIDIA/tacotron2#setup).
@@ -74,7 +80,11 @@ CUDA_VISIBLE_DEVICES=2,3 PYTHONPATH=. python matcha/train.py experiment=ljspeech
 ```
 
 ## Synthesize
-It will be continued.
+These codes are run and the example-speeches are synthesized in my vscode environment. I moved this Jupyter-Notebook file to Colab to share the synthesized example-speeches. Here is the [`Colab Notebook`](https://colab.research.google.com/drive/1JrwHDXrgcarZ7bxBAEP-cgBp6Yf_Ris4?usp=sharing).     
+**Synthesize_Examples.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1JrwHDXrgcarZ7bxBAEP-cgBp6Yf_Ris4?usp=sharing)           
+<img src="/readme_imgs/스크린샷 2024-05-28 오전 8.52.42.png" width="67%"></img>
+- You can refer to the code for synthesis: [`matcha/utils/synthesize_utils.py`](https://github.com/elu-lab/matcha_tts_e/blob/main/matcha/utils/synthesize_utils.py)
+- `CLI Arguments`: Will be Updated!
 
 ## Reference
 - 🍵 Paper: [Matcha-TTS: A fast TTS architecture with conditional flow matching](https://huggingface.co/papers/2309.03199)     
