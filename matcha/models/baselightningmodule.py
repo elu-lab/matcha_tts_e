@@ -4,19 +4,17 @@ Github[bastligthingmodule.py]: https://github.com/shivammehta25/Matcha-TTS/blob/
 This is a base lightning module that can be used to train a model.
 The benefit of this abstraction is that all the logic outside of model definition can be reused for different models.
 """
-
+import gc
 import inspect
 from abc import ABC 
 from typing import Any, Dict
 
 import wandb
-
 import torch
 
 #lightning
 import lightning
-# import lightning as L
-
+import lightning as L
 from lightning import LightningModule
 from lightning.pytorch.utilities import grad_norm
 
@@ -26,8 +24,27 @@ from matcha.utils.utils import plot_tensor
 log = utils.get_pylogger(__name__)
 
 
+# ========================================================================================================= # 
+
+# from pytorch_lightning.callbacks import Callback
+# https://lightning.ai/docs/pytorch/stable/extensions/callbacks.html
+class MemoryCleanupCallback(L.Callback):
+    def on_train_epoch_end(self, trainer, pl_module):
+        # pl_module.training_step_outputs.clear()
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+        gc.collect()
+        
+    def on_validation_epoch_end(self, trainer, pl_module):
+        # pl_module.training_step_outputs.clear()
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+        gc.collect()
+        
+# ========================================================================================================= # 
+
+
 class BaseLightningClass(LightningModule, ABC):
-    
     def update_data_statistics(self, data_statistics):
         if data_statistics is None:
             data_statistics= {"mel_mean": 0.0, "mel_std": 1.0}
