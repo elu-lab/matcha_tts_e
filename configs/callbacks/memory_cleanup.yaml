@@ -1,0 +1,2 @@
+memory_cleanup:
+  _target_: matcha.models.baselightningmodule.MemoryCleanupCallback
