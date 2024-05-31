@@ -5,6 +5,7 @@
 # %pip install hydra-core --upgrade
 
 # import
+import gc
 from typing import Any, Dict, List, Optional, Tuple
 
 # hydra
@@ -107,6 +108,9 @@ def train(cfg: DictConfig) -> Tuple[Dict[str, Any], Dict[str, Any]]:
     if cfg.get("train"):
         log.info("Starting training!")
         trainer.fit(model = model, datamodule = datamodule, ckpt_path = cfg.get("ckpt_path"))
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+        gc.collect()
 
     train_metrics = trainer.callback_metrics
     return {**train_metrics}
