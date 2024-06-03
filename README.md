@@ -3,24 +3,42 @@ This repo is mainly based on :octocat: [🍵 Matcha-TTS Official Github](https:/
 
 - 🔥[`Pytorch`](https://pytorch.org/), ⚡[`Lightning`](https://lightning.ai/docs/pytorch/stable/), 🐉🐲🐲[`hydra-core`](https://hydra.cc/docs/intro/)
 - 🤗 **[`wandb`](https://kr.wandb.ai/)** Click 👉 [![wandb](https://raw.githubusercontent.com/wandb/assets/main/wandb-github-badge-gradient.svg)](https://wandb.ai/wako/matcha_tts_e?nw=nwuserwako)
-    <details>
-    <summary>🦋 trim-butterfly-16 (<a href="https://wandb.ai/wako/matcha_tts_e/runs/77nc0bme?nw=nwuserwako">dashboard</a>) </summary>
-    <div>
-    - Batch Size: 16<br>
-    - GPU: NVIDIA GeForce RTX 4080 <br>
-    - GPU_COUNT: 1<br>
-      <p>
-        <img src="readme_imgs/스크린샷 2024-05-28 오전 9.30.14.png" alt="1" style="width:45%;"/>
-        <img src="readme_imgs/스크린샷 2024-05-28 오전 9.30.31.png" alt="2" style="width:44%;"/>
-     </p>
-    </div>
-    </details>
+
 
 ## Trying to code simpler
 While studying :octocat: [🍵 Matcha-TTS Official Github](https://github.com/shivammehta25/Matcha-TTS/tree/main), I modified some codes to make it simpler.
 - 🤗 Logger: **[`wandb`](https://kr.wandb.ai/)** (More comfortable and easy access)
 - :fire: [`[Pytorch-Hub]NVIDIA/HiFi-GAN`](https://pytorch.org/hub/nvidia_deeplearningexamples_hifigan/): used as a vocoder.
-- MAS: :octocat: [resemble-ai/monotonic_align](https://github.com/resemble-ai/monotonic_align) 👇
+- **MAS:** :octocat: [resemble-ai/monotonic_align](https://github.com/resemble-ai/monotonic_align) 👇
+- **MemoryCleanupCallback Added!**
+  
+  ```python
+  import gc
+  import torch
+  import lightning as L
+  
+    class MemoryCleanupCallback(L.Callback):
+        def on_train_epoch_end(self, trainer, pl_module):
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+            gc.collect()
+            
+        def on_validation_epoch_end(self, trainer, pl_module):
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+            gc.collect()
+  ```
+
+## Colab notebooks (Examples):
+These codes are run and the example-speeches are synthesized in my vscode environment. I moved this Jupyter Notebook file to Colab to share the synthesized example-speeches below:    
+
+- **Samples_trim_butterfly_16.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1M_CgnwZCt1kYQhxohAR3beUUn40553lR?usp=sharing) | `BS`: `16` | `GPU`: `NVIDIA GeForce RTX 4080 (x1)`       
+- **Samples_decent_meadow_46.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1BV0F9dXfmAZg390zC68s7feXkugBK8nL?usp=sharing) | `BS`: `32` | `LR`: `2e-5` | `GPU`: `NVIDIA GeForce RTX 4080 (x1)`           
+- :star: **Samples_wobbly_frog_53.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/193Sauiz-GdMIJslbH3I56bWqSmO_iXPF?usp=sharing) | `BS`: `16` | `Precision`: `bf16-mixed` | `GPU`: `NVIDIA GeForce RTX 4080 (x1)`                
+- **Samples_wobbly_serenity_54.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/136jutbUw6sQVDPP4ccQlIjoyRRW_sD-R?usp=sharing) | `BS`: `32` | `Precision`: `bf16-mixed` | `GPU`: `NVIDIA GeForce RTX 4080 (x1)`               
+- **Samples_jolly_frog_47.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1UWypCHOsQQJF-HX3vToNc7zah6lMcPUg?usp=sharing) | `BS`: `32` | `LR`: `2e-5` | `GPU`: `NVIDIA GeForce RTX 4090 (x1)`      
+- :star2: **Samples_eager_frost_50.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1iy7v1CWAA0rUqoYN2nh5INVZ43OqX1j0?usp=sharing) | `BS`: `16` | `GPU`: `NVIDIA GeForce RTX 4090 (x1)`             
+- :sparkles: **Samples_royal_grass_56.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1OklqorBjE7X11XHkKuCofly-Nc8iuQTu?usp=sharing) | `BS`: `16` | `Precision`: `bf16-mixed` | `GPU`: `NVIDIA GeForce RTX 4090 (x1)`                    
 
 ## MAS(=Monotonic Alignment Search) Installation
 This is not included in [`requirements.txt`](https://github.com/elu-lab/matcha_tts_e/blob/main/requirements.txt). You can install MAS(Monotonic_Alignment_Search) with a following command below:     
@@ -80,9 +98,11 @@ CUDA_VISIBLE_DEVICES=2,3 PYTHONPATH=. python matcha/train.py experiment=ljspeech
 ```
 
 ## Synthesize
-These codes are run and the example-speeches are synthesized in my vscode environment. I moved this Jupyter-Notebook file to Colab to share the synthesized example-speeches. Here is the [`Colab Notebook`](https://colab.research.google.com/drive/1JrwHDXrgcarZ7bxBAEP-cgBp6Yf_Ris4?usp=sharing).     
-**Synthesize_Examples.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1JrwHDXrgcarZ7bxBAEP-cgBp6Yf_Ris4?usp=sharing)           
-<img src="/readme_imgs/스크린샷 2024-05-28 오전 8.52.42.png" width="67%"></img>
+These codes are run and the example-speeches are synthesized in my vscode environment. I moved this Jupyter-Notebook file to Colab to share the synthesized example-speeches.      
+
+**Samples_wobbly_frog_53.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/193Sauiz-GdMIJslbH3I56bWqSmO_iXPF?usp=sharing)      
+
+- you can check more samples **Colab notebooks (Examples)** above.
 - You can refer to the code for synthesis: [`matcha/utils/synthesize_utils.py`](https://github.com/elu-lab/matcha_tts_e/blob/main/matcha/utils/synthesize_utils.py)
 - This notebook is also on this github repo: [`notebooks/Synthesize_Examples.ipynb`](https://github.com/elu-lab/matcha_tts_e/blob/main/notebooks/Synthesize_Examples.ipynb)
 - `CLI Arguments`: Will be Updated!
