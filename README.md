@@ -9,8 +9,21 @@ This repo is mainly based on :octocat: [🍵 Matcha-TTS Official Github](https:/
 While studying :octocat: [🍵 Matcha-TTS Official Github](https://github.com/shivammehta25/Matcha-TTS/tree/main), I modified some codes to make it simpler.
 - 🤗 Logger: **[`wandb`](https://kr.wandb.ai/)** (More comfortable and easy access)
 - :fire: [`[Pytorch-Hub]NVIDIA/HiFi-GAN`](https://pytorch.org/hub/nvidia_deeplearningexamples_hifigan/): used as a vocoder.
-- **MAS:** :octocat: [resemble-ai/monotonic_align](https://github.com/resemble-ai/monotonic_align) 👇
-- **MemoryCleanupCallback Added!**
+- **MAS:** :octocat: [resemble-ai/monotonic_align](https://github.com/resemble-ai/monotonic_align) 
+  
+## Colab notebooks (Examples):
+These codes are run and the example-speeches are synthesized in my vscode environment. I moved this Jupyter Notebook file to Colab to share the synthesized example-speeches below:    
+
+- **Samples_trim_butterfly_16.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1M_CgnwZCt1kYQhxohAR3beUUn40553lR?usp=sharing) | `BS`: `16` | `GPU`: `NVIDIA GeForce RTX 4080 (x1)`       
+- **Samples_decent_meadow_46.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1BV0F9dXfmAZg390zC68s7feXkugBK8nL?usp=sharing) | `BS`: `32` | `LR`: `2e-5` | `GPU`: `NVIDIA GeForce RTX 4080 (x1)`           
+- :star: **Samples_wobbly_frog_53.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/193Sauiz-GdMIJslbH3I56bWqSmO_iXPF?usp=sharing) | `BS`: `16` | `Precision`: `bf16-mixed` | `GPU`: `NVIDIA GeForce RTX 4080 (x1)`                
+- **Samples_wobbly_serenity_54.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/136jutbUw6sQVDPP4ccQlIjoyRRW_sD-R?usp=sharing) | `BS`: `32` | `Precision`: `bf16-mixed` | `GPU`: `NVIDIA GeForce RTX 4080 (x1)`               
+- **Samples_jolly_frog_47.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1UWypCHOsQQJF-HX3vToNc7zah6lMcPUg?usp=sharing) | `BS`: `32` | `LR`: `2e-5` | `GPU`: `NVIDIA GeForce RTX 4090 (x1)`      
+- :star2: **Samples_eager_frost_50.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1iy7v1CWAA0rUqoYN2nh5INVZ43OqX1j0?usp=sharing) | `BS`: `16` | `GPU`: `NVIDIA GeForce RTX 4090 (x1)`             
+- :sparkles: **Samples_royal_grass_56.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1OklqorBjE7X11XHkKuCofly-Nc8iuQTu?usp=sharing) | `BS`: `16` | `Precision`: `bf16-mixed` | `GPU`: `NVIDIA GeForce RTX 4090 (x1)`                    
+
+
+## **MemoryCleanupCallback Added!**     
   
   ```python
   import gc
@@ -27,18 +40,9 @@ While studying :octocat: [🍵 Matcha-TTS Official Github](https://github.com/sh
             if torch.cuda.is_available():
                 torch.cuda.empty_cache()
             gc.collect()
+  
   ```
 
-## Colab notebooks (Examples):
-These codes are run and the example-speeches are synthesized in my vscode environment. I moved this Jupyter Notebook file to Colab to share the synthesized example-speeches below:    
-
-- **Samples_trim_butterfly_16.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1M_CgnwZCt1kYQhxohAR3beUUn40553lR?usp=sharing) | `BS`: `16` | `GPU`: `NVIDIA GeForce RTX 4080 (x1)`       
-- **Samples_decent_meadow_46.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1BV0F9dXfmAZg390zC68s7feXkugBK8nL?usp=sharing) | `BS`: `32` | `LR`: `2e-5` | `GPU`: `NVIDIA GeForce RTX 4080 (x1)`           
-- :star: **Samples_wobbly_frog_53.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/193Sauiz-GdMIJslbH3I56bWqSmO_iXPF?usp=sharing) | `BS`: `16` | `Precision`: `bf16-mixed` | `GPU`: `NVIDIA GeForce RTX 4080 (x1)`                
-- **Samples_wobbly_serenity_54.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/136jutbUw6sQVDPP4ccQlIjoyRRW_sD-R?usp=sharing) | `BS`: `32` | `Precision`: `bf16-mixed` | `GPU`: `NVIDIA GeForce RTX 4080 (x1)`               
-- **Samples_jolly_frog_47.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1UWypCHOsQQJF-HX3vToNc7zah6lMcPUg?usp=sharing) | `BS`: `32` | `LR`: `2e-5` | `GPU`: `NVIDIA GeForce RTX 4090 (x1)`      
-- :star2: **Samples_eager_frost_50.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1iy7v1CWAA0rUqoYN2nh5INVZ43OqX1j0?usp=sharing) | `BS`: `16` | `GPU`: `NVIDIA GeForce RTX 4090 (x1)`             
-- :sparkles: **Samples_royal_grass_56.ipynb** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1OklqorBjE7X11XHkKuCofly-Nc8iuQTu?usp=sharing) | `BS`: `16` | `Precision`: `bf16-mixed` | `GPU`: `NVIDIA GeForce RTX 4090 (x1)`                    
 
 ## MAS(=Monotonic Alignment Search) Installation
 This is not included in [`requirements.txt`](https://github.com/elu-lab/matcha_tts_e/blob/main/requirements.txt). You can install MAS(Monotonic_Alignment_Search) with a following command below:     
