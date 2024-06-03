@@ -108,7 +108,7 @@ These codes are run and the example-speeches are synthesized in my vscode enviro
 
 - you can check more samples **Colab notebooks (Examples)** above.
 - You can refer to the code for synthesis: [`matcha/utils/synthesize_utils.py`](https://github.com/elu-lab/matcha_tts_e/blob/main/matcha/utils/synthesize_utils.py)
-- This notebook is also on this github repo: [`notebooks/Synthesize_Examples.ipynb`](https://github.com/elu-lab/matcha_tts_e/blob/main/notebooks/Synthesize_Examples.ipynb)
+- This notebook is also on this github repo: [`notebooks/Samples_wobbly_frog_53.ipynb`](https://github.com/elu-lab/matcha_tts_e/blob/main/notebooks/Samples_wobbly_frog_53.ipynb)
 - `CLI Arguments`: Will be Updated!
 
 ## Reference
