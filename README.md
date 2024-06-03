@@ -1,15 +1,15 @@
 # 🍵 matcha_tts_e
 This repo is mainly based on :octocat: [🍵 Matcha-TTS Official Github](https://github.com/shivammehta25/Matcha-TTS/tree/main) and some codes are modified. The purpose of this repository is to study and study 🍵 [Matcha-TTS: A fast TTS architecture with conditional flow matching](https://huggingface.co/papers/2309.03199).
 
-- 🔥[`Pytorch`](https://pytorch.org/), ⚡[`Lightning`](https://lightning.ai/docs/pytorch/stable/), 🐉🐲🐲[`hydra-core`](https://hydra.cc/docs/intro/)
+- 🔥[`Pytorch`](https://pytorch.org/), ⚡[`Lightning`](https://lightning.ai/docs/pytorch/stable/), 🐉🐲🐲 [`hydra-core`](https://hydra.cc/docs/intro/)
 - 🤗 **[`wandb`](https://kr.wandb.ai/)** Click 👉 [![wandb](https://raw.githubusercontent.com/wandb/assets/main/wandb-github-badge-gradient.svg)](https://wandb.ai/wako/matcha_tts_e?nw=nwuserwako)
 
 
 ## Trying to code simpler
 While studying :octocat: [🍵 Matcha-TTS Official Github](https://github.com/shivammehta25/Matcha-TTS/tree/main), I modified some codes to make it simpler.
-- 🤗 Logger: **[`wandb`](https://kr.wandb.ai/)** (More comfortable and easy access)
-- :fire: [`[Pytorch-Hub]NVIDIA/HiFi-GAN`](https://pytorch.org/hub/nvidia_deeplearningexamples_hifigan/): used as a vocoder.
-- **MAS:** :octocat: [resemble-ai/monotonic_align](https://github.com/resemble-ai/monotonic_align) 
+- **Logger**: 🤗 **[`wandb`](https://kr.wandb.ai/)** (More comfortable and easy access)
+- **Vocoder**: :fire: [`[Pytorch-Hub]NVIDIA/HiFi-GAN`](https://pytorch.org/hub/nvidia_deeplearningexamples_hifigan/)
+- **Alignment**: :octocat: [resemble-ai/monotonic_align](https://github.com/resemble-ai/monotonic_align) 
   
 ## Colab notebooks (Examples):
 These codes are run and the example-speeches are synthesized in my vscode environment. I moved this Jupyter Notebook file to Colab to share the synthesized example-speeches below:    
